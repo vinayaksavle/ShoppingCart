@@ -23,6 +23,7 @@ namespace ShoppingCart.Repo
 
         public ShoppingVM Add(ShoppingVM newItem)
         {
+            newItem.Id = Guid.NewGuid();
             _context.ShoppingItems.Add(newItem);
             _context.SaveChanges();
 

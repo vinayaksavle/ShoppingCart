@@ -1,0 +1,18 @@
+<mat-card-title>{{action}} Order</mat-card-title>
+
+<div mat-dialog-content>
+    <mat-form-field *ngIf="action != 'Delete';">
+        <input placeholder="Name" autocomplete="off" matInput [(ngModel)]="passedData.name">
+    </mat-form-field>
+    <mat-form-field *ngIf="action != 'Delete';">
+        <input type="number" placeholder="Price" autocomplete="off" matInput [(ngModel)]="passedData.price">
+    </mat-form-field>
+    <mat-form-field *ngIf="action != 'Delete';">
+        <input placeholder="Manufacturer" autocomplete="off" matInput [(ngModel)]="passedData.manufacturer">
+    </mat-form-field>
+    <div *ngIf="action == 'Delete'">Are you sure you want to delete "{{passedData.name}}"?</div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onAction()">{{action}}</button>
+    <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>

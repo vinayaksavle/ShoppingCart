@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Database;
 using ShoppingCart.Model;
@@ -12,6 +13,7 @@ namespace ShoppingCart.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors]
     public class ShoppingCartController : ControllerBase
     {
         private readonly IShoppingCartRepo _repo;
@@ -41,6 +43,7 @@ namespace ShoppingCart.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
             var item = _repo.Add(value);
             return CreatedAtAction("Get", new { id = item.Id }, item);
         }

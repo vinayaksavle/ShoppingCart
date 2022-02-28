@@ -35,6 +35,14 @@ namespace ShoppingCart
             });
             services.AddScoped<IShoppingCartRepo, ShoppingCartRepo>();
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:44386", "http://localhost:5000", "http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,11 +58,16 @@ namespace ShoppingCart
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            
         }
     }
 }
